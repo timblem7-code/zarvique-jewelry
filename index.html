@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarvique Jewelry | Fine Handcrafted Jewels</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            /**
+             * Public Key Updated
+             */
+            const PUBLIC_KEY = "3FCpfReNEsxvziq3z"; 
+            if (PUBLIC_KEY !== "" && PUBLIC_KEY !== "YOUR_PUBLIC_KEY_HERE") {
+                emailjs.init(PUBLIC_KEY); 
+            }
+        })();
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+        :root {
+            --gold-accent: #c5a059;
+            --dark-luxury: #1a1a1a;
+            --soft-bg: #fdfbf7;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-luxury);
+            scroll-behavior: smooth;
+        }
+
+        .brand-font { font-family: 'Cormorant Gramamond', serif; }
+
+        .announcement-bar {
+            background-color: var(--dark-luxury);
+            color: #d4af37; 
+            text-align: center;
+            padding: 10px 0;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        #navbar { transition: all 0.5s ease; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .nav-scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 12px 0 !important;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+        }
+
+        .hero-section {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .product-card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: var(--soft-bg);
+            padding-top: 125%; 
+        }
+        
+        .product-card-img-wrapper img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .product-card:hover .product-card-img-wrapper img { transform: scale(1.08); }
+
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--gold-accent);
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 4px 8px;
+            z-index: 10;
+            text-transform: uppercase;
+        }
+
+        .option-chip {
+            border: 1px solid #e5e7eb;
+            padding: 8px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-chip.selected {
+            background: black;
+            color: white;
+            border-color: black;
+        }
+
+        #checkout-section, #success-section, #admin-dashboard, #admin-login, #product-detail-view {
+            display: none;
+        }
+
+        .gold-btn {
+            background-color: var(--dark-luxury);
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-luxury);
+        }
+        .gold-btn:hover { background-color: transparent; color: var(--dark-luxury); }
+
+        .admin-trigger {
+            color: #ff0000;
+            font-size: 5px;
+            cursor: pointer;
+            text-align: center;
+            padding: 5px;
+            background: #000;
+            opacity: 0.1;
+        }
+
+        .sidebar-item.active {
+            background-color: #f3f4f6;
+            border-right: 4px solid var(--gold-accent);
+        }
+
+        #redirect-timer {
+            font-weight: bold;
+            color: var(--gold-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="announcement-bar">✨ PREMIUM HANDCRAFTED JEWELRY - FREE SHIPPING ✨</div>
+
+    <!-- Store Frontend -->
+    <div id="store-frontend">
+        <nav id="navbar" class="fixed w-full z-50 bg-transparent py-8 text-white">
+            <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
+                <div class="hidden md:flex space-x-10 text-[10px] font-semibold tracking-[0.2em] uppercase">
+                    <a href="#products-area" class="hover:text-[#d4af37]">Shop All</a>
+                </div>
+                <div class="absolute left-1/2 -translate-x-1/2 text-center cursor-pointer flex flex-col items-center" onclick="showPage('store')">
+                    <span id="nav-logo" class="text-3xl font-bold tracking-[0.4em] brand-font text-white transition-colors duration-500">ZARVIQUE</span>
+                    <div class="flex gap-1 text-[8px] mt-1 text-[#d4af37]">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <button onclick="toggleCart()" class="relative">
+                        <i class="fa-solid fa-shopping-bag text-lg"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-3 bg-[#d4af37] text-white text-[8px] font-bold w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero-section">
+            <div class="px-6">
+                <h1 class="text-6xl md:text-7xl brand-font italic mb-6">The Royal Collection</h1>
+                <a href="#products-area" class="inline-block bg-white text-black px-12 py-4 text-[10px] font-bold uppercase tracking-widest">Explore Now</a>
+            </div>
+        </section>
+
+        <section id="products-area" class="py-24 px-8 max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-12 border-b pb-6">
+                <h2 class="text-3xl brand-font italic">Our Catalog</h2>
+                <div class="flex gap-4">
+                    <button onclick="renderProducts('all')" class="text-[9px] uppercase font-bold tracking-widest opacity-60">All Products</button>
+                    <button onclick="renderProducts('Rings')" class="text-[9px] uppercase font-bold tracking-widest opacity-60">Rings</button>
+                    <button onclick="renderProducts('Necklaces')" class="text-[9px] uppercase font-bold tracking-widest opacity-60">Necklaces</button>
+                </div>
+            </div>
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"></div>
+        </section>
+
+        <footer class="bg-stone-50 py-12 text-center">
+            <p class="text-[9px] uppercase tracking-[0.4em] text-gray-400">&copy; 2026 Zarvique Jewelry</p>
+            <div class="admin-trigger mt-4" onclick="showPage('admin-login')">ADMIN ACCESS</div>
+        </footer>
+    </div>
+
+    <!-- Product Detail View -->
+    <div id="product-detail-view" class="fixed inset-0 z-[150] bg-white overflow-y-auto">
+        <div class="max-w-7xl mx-auto px-8 py-12">
+            <button onclick="showPage('store')" class="mb-8 text-[10px] font-bold uppercase tracking-widest opacity-50"><i class="fa-solid fa-arrow-left mr-2"></i> Back</button>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+                <div class="relative group">
+                    <div id="detail-sale-badge" class="sale-badge hidden"></div>
+                    <img id="detail-img" src="" class="w-full aspect-[4/5] object-cover bg-stone-100">
+                    <button id="like-btn" onclick="toggleLike()" class="absolute top-6 right-6 text-2xl text-white drop-shadow-md">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+                <div class="flex flex-col">
+                    <h2 id="detail-name" class="text-5xl brand-font italic mb-2 uppercase tracking-wide">Product Name</h2>
+                    <div class="flex items-center gap-3 mb-8">
+                        <span id="detail-price" class="text-2xl text-[#d4af37] font-light">Rs. 0</span>
+                        <span id="detail-original-price" class="text-lg text-gray-400 line-through font-light hidden">Rs. 0</span>
+                    </div>
+                    <div class="mb-10">
+                        <h4 class="text-[10px] font-bold uppercase tracking-widest mb-4 opacity-40">Description</h4>
+                        <p id="detail-desc" class="text-sm leading-relaxed text-gray-600">No description available.</p>
+                    </div>
+                    <div class="space-y-8 mb-12">
+                        <div>
+                            <label class="text-[10px] uppercase font-bold tracking-widest block mb-3">Select Color</label>
+                            <div id="detail-colors" class="flex gap-3"></div>
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase font-bold tracking-widest block mb-3">Select Size</label>
+                            <div id="detail-sizes" class="flex gap-3"></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="addToCartFromDetail()" class="flex-grow border border-black py-5 text-[11px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition">Add to Cart</button>
+                        <button onclick="buyNow()" class="flex-grow gold-btn py-5 text-[11px] font-bold uppercase tracking-widest">Buy It Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t pt-16">
+                <h3 class="text-2xl brand-font italic mb-12">You May Also Like</h3>
+                <div id="related-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login -->
+    <div id="admin-login" class="h-screen flex items-center justify-center bg-stone-50 px-8">
+        <div class="max-w-md w-full bg-white p-12 shadow-xl text-center">
+            <h2 class="text-2xl brand-font italic mb-8">Secure Login</h2>
+            <input type="password" id="admin_pass" placeholder="Access Code" class="w-full border-b py-4 outline-none text-center mb-10 text-xl font-light">
+            <button onclick="handleAdminLogin()" class="w-full gold-btn py-4 text-[10px] font-bold uppercase tracking-widest">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="flex min-h-screen bg-stone-50">
+        <div class="w-64 bg-white border-r flex flex-col p-6 space-y-2">
+            <h2 class="text-xl brand-font italic mb-10 border-b pb-4">Zarvique Admin</h2>
+            <button onclick="switchAdminTab('stock')" id="tab-stock" class="sidebar-item p-3 text-left text-[11px] font-bold uppercase tracking-widest flex items-center gap-3 active">
+                <i class="fa-solid fa-gem"></i> Stock Management
+            </button>
+            <button onclick="switchAdminTab('orders')" id="tab-orders" class="sidebar-item p-3 text-left text-[11px] font-bold uppercase tracking-widest flex items-center gap-3">
+                <i class="fa-solid fa-truck"></i> Order History
+            </button>
+            <button onclick="switchAdminTab('settings')" id="tab-settings" class="sidebar-item p-3 text-left text-[11px] font-bold uppercase tracking-widest flex items-center gap-3">
+                <i class="fa-solid fa-gears"></i> Store Settings
+            </button>
+            <div class="mt-auto pt-6">
+                <button onclick="showPage('store')" class="w-full text-[10px] font-bold uppercase opacity-50 border p-3">Exit Admin</button>
+            </div>
+        </div>
+        <div class="flex-grow p-12 overflow-y-auto">
+            <div id="admin-stock-content" class="admin-tab-content">
+                <h2 class="text-3xl brand-font italic mb-12">Add New Masterpiece</h2>
+                <div class="bg-white p-10 shadow-sm mb-12">
+                    <form id="add-product-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" id="p_name" placeholder="Product Title" required class="border-b py-3 outline-none">
+                        <input type="text" id="p_image" placeholder="Image Link" required class="border-b py-3 outline-none">
+                        <div class="flex gap-4">
+                            <input type="number" id="p_price" placeholder="Sale Price (PKR)" required class="flex-grow border-b py-3 outline-none">
+                            <input type="number" id="p_original" placeholder="Original Price (Optional)" class="flex-grow border-b py-3 outline-none">
+                        </div>
+                        <select id="p_cat" class="border-b py-3 outline-none bg-white">
+                            <option value="Rings">Rings</option>
+                            <option value="Necklaces">Necklaces</option>
+                            <option value="Earrings">Earrings</option>
+                            <option value="Bracelets">Bracelets</option>
+                        </select>
+                        <input type="text" id="p_colors" placeholder="Colors (e.g. Gold, Rose, Silver)" class="border-b py-3 outline-none">
+                        <input type="text" id="p_sizes" placeholder="Sizes (e.g. 6, 7, 8)" class="border-b py-3 outline-none">
+                        <textarea id="p_desc" placeholder="Detailed Description" class="md:col-span-2 border-b py-3 outline-none h-24"></textarea>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="gold-btn w-full py-4 text-[10px] font-bold uppercase tracking-widest">Add to Catalog</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-white p-10 shadow-sm">
+                    <h3 class="text-[10px] font-bold uppercase tracking-widest mb-8 border-b pb-4">Live Inventory</h3>
+                    <div id="admin-inventory-list" class="space-y-4"></div>
+                </div>
+            </div>
+            <div id="admin-orders-content" class="admin-tab-content hidden">
+                <h2 class="text-3xl brand-font italic mb-12">Recent Orders</h2>
+                <div id="order-history-list" class="space-y-6">
+                    <p class="text-center opacity-50 py-10">No orders received yet.</p>
+                </div>
+            </div>
+            <div id="admin-settings-content" class="admin-tab-content hidden">
+                <h2 class="text-3xl brand-font italic mb-12">Store Settings</h2>
+                <div class="bg-white p-10 shadow-sm space-y-8">
+                    <div>
+                        <label class="text-[10px] font-bold uppercase block mb-2">Delivery Charges (PKR)</label>
+                        <div class="flex gap-4">
+                            <input type="number" id="admin-delivery-fee" class="border p-4 outline-none text-sm w-full" placeholder="Enter amount">
+                            <button onclick="updateDeliveryFee()" class="gold-btn px-8 py-4 text-[10px] font-bold uppercase tracking-widest">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout -->
+    <div id="checkout-section" class="py-24 px-8 max-w-4xl mx-auto">
+        <h2 class="text-4xl brand-font italic text-center mb-12">Shipping Information</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <form id="order-form" class="space-y-6">
+                <input type="text" id="user_name" placeholder="Full Name" required class="w-full border-b py-4 outline-none">
+                <input type="tel" id="user_phone" placeholder="WhatsApp Number" required class="w-full border-b py-4 outline-none">
+                <textarea id="user_address" placeholder="Full Home Address" required class="w-full border-b py-4 outline-none h-24"></textarea>
+                <div class="pt-6">
+                    <label class="text-[10px] font-bold uppercase tracking-widest block mb-4">Payment Method</label>
+                    <div class="border p-4 flex items-center gap-3 bg-stone-50">
+                        <i class="fa-solid fa-truck-fast text-[#d4af37]"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest">Cash on Delivery (COD)</span>
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" class="w-full gold-btn py-5 text-[11px] font-bold uppercase tracking-widest">Confirm COD Order</button>
+            </form>
+            <div class="bg-stone-50 p-8 h-fit border">
+                <h3 class="text-sm font-bold uppercase tracking-widest mb-6 border-b pb-4">Order Summary</h3>
+                <div id="checkout-summary" class="space-y-3 mb-6"></div>
+                <div class="border-t pt-4 space-y-2 text-xs">
+                    <div class="flex justify-between"><span class="opacity-60">Subtotal</span><span id="summary-subtotal">Rs. 0</span></div>
+                    <div class="flex justify-between text-[#d4af37] font-bold"><span>Delivery Fee</span><span id="summary-delivery">Rs. 0</span></div>
+                    <div class="flex justify-between text-lg font-bold border-t mt-4 pt-4"><span class="brand-font italic">Grand Total</span><span id="summary-grand-total">Rs. 0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-section" class="h-screen flex items-center justify-center text-center">
+        <div class="max-w-md px-6">
+            <div class="text-[#d4af37] text-6xl mb-6"><i class="fa-solid fa-circle-check"></i></div>
+            <h2 class="text-5xl brand-font italic mb-4">Order Received!</h2>
+            <p class="text-gray-500 mb-4 text-sm">Your jewelry is being prepared. We will contact you on WhatsApp shortly.</p>
+            <p class="text-xs text-gray-400 mb-8 uppercase tracking-widest">Redirecting to gallery in <span id="redirect-timer">12</span> seconds...</p>
+            <button onclick="showPage('store')" class="gold-btn px-12 py-4 text-[10px] font-bold uppercase tracking-widest">Back Now</button>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-80 sm:w-96 z-[200] translate-x-full bg-white shadow-2xl flex flex-col transition-transform">
+        <div class="p-6 border-b flex justify-between items-center"><h2 class="text-xl brand-font">Cart</h2><button onclick="toggleCart()" class="text-2xl">&times;</button></div>
+        <div id="cart-items" class="flex-grow p-6 space-y-4 overflow-y-auto"></div>
+        <div class="p-6 border-t bg-stone-50">
+            <div class="flex justify-between mb-4"><span class="text-xs uppercase font-bold">Total</span><span id="cart-total">Rs. 0</span></div>
+            <button onclick="showPage('checkout')" class="w-full gold-btn py-4 text-[10px] font-bold uppercase">Checkout</button>
+        </div>
+    </div>
+    <div id="overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-opacity z-[190]"></div>
+
+    <script>
+        const ADMIN_CODE = "Raziafaiz123";
+        let products = JSON.parse(localStorage.getItem('zarvique_stock')) || [
+            { id: 1, name: 'Royal Solitaire Ring', price: 150000, originalPrice: 220000, category: 'Rings', image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800', desc: 'Handcrafted diamond ring set in 18k solid gold.', colors: ['Gold', 'Silver'], sizes: ['6', '7', '8'] },
+            { id: 2, name: 'Noor Necklace', price: 280000, originalPrice: 350000, category: 'Necklaces', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800', desc: 'Elegant bridal necklace with premium stones.', colors: ['Rose Gold'], sizes: ['Standard'] }
+        ];
+        let orderHistory = JSON.parse(localStorage.getItem('zarvique_orders')) || [];
+        let deliveryFee = parseInt(localStorage.getItem('zarvique_delivery_fee')) || 250;
+        let cart = [];
+        let selectedProduct = null;
+        let selColor = '';
+        let selSize = '';
+        let isLiked = false;
+        let redirectTimeout = null;
+        let countdownInterval = null;
+
+        window.onload = () => { renderProducts(); document.getElementById('admin-delivery-fee').value = deliveryFee; };
+
+        function calculateOff(price, original) { if(!original || original <= price) return null; return Math.round(((original - price) / original) * 100); }
+
+        function renderProducts(cat = 'all') {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+            const list = cat === 'all' ? products : products.filter(p => p.category === cat);
+            list.forEach(p => {
+                const off = calculateOff(p.price, p.originalPrice);
+                grid.innerHTML += `
+                    <div class="product-card cursor-pointer group" onclick="openDetail(${p.id})">
+                        <div class="product-card-img-wrapper">
+                            ${off ? `<div class="sale-badge">${off}% OFF</div>` : ''}
+                            <img src="${p.image}">
+                            <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="bg-white text-black text-[9px] font-bold px-6 py-2 uppercase">View Detail</span>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <h3 class="brand-font italic text-lg uppercase">${p.name}</h3>
+                            <div class="flex items-center gap-2">
+                                <p class="text-sm font-light text-[#d4af37]">Rs. ${p.price.toLocaleString()}</p>
+                                ${p.originalPrice ? `<p class="text-[11px] text-gray-400 line-through">Rs. ${p.originalPrice.toLocaleString()}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function openDetail(id) {
+            selectedProduct = products.find(p => p.id === id);
+            document.getElementById('detail-name').innerText = selectedProduct.name;
+            document.getElementById('detail-price').innerText = `Rs. ${selectedProduct.price.toLocaleString()}`;
+            const off = calculateOff(selectedProduct.price, selectedProduct.originalPrice);
+            const origEl = document.getElementById('detail-original-price');
+            const badgeEl = document.getElementById('detail-sale-badge');
+            if(selectedProduct.originalPrice && selectedProduct.originalPrice > selectedProduct.price) {
+                origEl.innerText = `Rs. ${selectedProduct.originalPrice.toLocaleString()}`;
+                origEl.classList.remove('hidden');
+                badgeEl.innerText = `${off}% OFF`;
+                badgeEl.classList.remove('hidden');
+            } else { origEl.classList.add('hidden'); badgeEl.classList.add('hidden'); }
+            document.getElementById('detail-img').src = selectedProduct.image;
+            document.getElementById('detail-desc').innerText = selectedProduct.desc || 'A signature Zarvique piece.';
+            renderChips('detail-colors', selectedProduct.colors, (val) => selColor = val);
+            renderChips('detail-sizes', selectedProduct.sizes, (val) => selSize = val);
+            renderRelated(selectedProduct.category, selectedProduct.id);
+            isLiked = false;
+            document.getElementById('like-btn').innerHTML = '<i class="fa-regular fa-heart"></i>';
+            showPage('detail');
+        }
+
+        function renderChips(containerId, list, callback) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            if(!list || list.length === 0) { container.innerHTML = '<span class="text-xs opacity-50">Standard</span>'; return; }
+            list.forEach((item, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-chip' + (idx === 0 ? ' selected' : '');
+                btn.innerText = item;
+                if(idx === 0) callback(item);
+                btn.onclick = () => {
+                    container.querySelectorAll('.option-chip').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    callback(item);
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderRelated(cat, currentId) {
+            const grid = document.getElementById('related-grid');
+            grid.innerHTML = '';
+            products.filter(p => p.category === cat && p.id !== currentId).slice(0, 4).forEach(p => {
+                grid.innerHTML += `<div class="cursor-pointer" onclick="openDetail(${p.id})"><img src="${p.image}" class="aspect-[4/5] object-cover mb-3"><p class="brand-font italic uppercase text-xs">${p.name}</p></div>`;
+            });
+        }
+
+        function toggleLike() { isLiked = !isLiked; document.getElementById('like-btn').innerHTML = isLiked ? '<i class="fa-solid fa-heart text-red-500"></i>' : '<i class="fa-regular fa-heart"></i>'; }
+        function addToCartFromDetail() { cart.push({...selectedProduct, cartId: Date.now(), color: selColor, size: selSize}); updateCartUI(); toggleCart(); }
+        function buyNow() { cart = [{...selectedProduct, cartId: Date.now(), color: selColor, size: selSize}]; updateCartUI(); showPage('checkout'); }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                container.innerHTML += `<div class="flex gap-4 border-b pb-4"><img src="${item.image}" class="w-16 h-20 object-cover"><div class="flex-grow"><p class="brand-font italic text-sm">${item.name}</p><p class="text-[9px] uppercase opacity-50">${item.color} | ${item.size}</p><p class="text-xs font-bold">Rs. ${item.price.toLocaleString()}</p></div><button onclick="removeFromCart(${item.cartId})">&times;</button></div>`;
+            });
+            document.getElementById('cart-total').innerText = `Rs. ${total.toLocaleString()}`;
+        }
+
+        function removeFromCart(id) { cart = cart.filter(i => i.cartId !== id); updateCartUI(); }
+
+        function showPage(page) {
+            if (redirectTimeout) clearTimeout(redirectTimeout);
+            if (countdownInterval) clearInterval(countdownInterval);
+            ['store-frontend', 'checkout-section', 'success-section', 'admin-login', 'product-detail-view', 'admin-dashboard'].forEach(s => { const el = document.getElementById(s); if (el) el.style.display = 'none'; });
+            if (page === 'store') document.getElementById('store-frontend').style.display = 'block';
+            else if (page === 'detail') document.getElementById('product-detail-view').style.display = 'block';
+            else if (page === 'admin-login') document.getElementById('admin-login').style.display = 'flex';
+            else if (page === 'admin-dash') { document.getElementById('admin-dashboard').style.display = 'flex'; renderAdminInventory(); renderOrderHistory(); }
+            else if (page === 'checkout') { document.getElementById('checkout-section').style.display = 'block'; updateCheckoutSummary(); }
+            else if (page === 'success') { document.getElementById('success-section').style.display = 'flex'; startRedirectTimer(); }
+            window.scrollTo(0,0);
+        }
+
+        function startRedirectTimer() {
+            let timeLeft = 12;
+            const timerDisplay = document.getElementById('redirect-timer');
+            timerDisplay.innerText = timeLeft;
+            countdownInterval = setInterval(() => { timeLeft--; timerDisplay.innerText = timeLeft; if (timeLeft <= 0) clearInterval(countdownInterval); }, 1000);
+            redirectTimeout = setTimeout(() => { showPage('store'); }, 12000);
+        }
+
+        function updateCheckoutSummary() {
+            const summaryDiv = document.getElementById('checkout-summary');
+            let subtotal = 0;
+            summaryDiv.innerHTML = cart.map(i => { subtotal += i.price; return `<div class="flex justify-between text-xs"><span class="opacity-70">${i.name} (${i.color}/${i.size})</span><span>Rs. ${i.price.toLocaleString()}</span></div>`; }).join('');
+            document.getElementById('summary-subtotal').innerText = `Rs. ${subtotal.toLocaleString()}`;
+            document.getElementById('summary-delivery').innerText = `Rs. ${deliveryFee.toLocaleString()}`;
+            document.getElementById('summary-grand-total').innerText = `Rs. ${(subtotal + deliveryFee).toLocaleString()}`;
+        }
+
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+            document.getElementById(`admin-${tab}-content`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).classList.add('active');
+        }
+
+        function updateDeliveryFee() {
+            const fee = parseInt(document.getElementById('admin-delivery-fee').value);
+            if(isNaN(fee)) return;
+            deliveryFee = fee;
+            localStorage.setItem('zarvique_delivery_fee', fee);
+            alert("Delivery Charges Updated!");
+        }
+
+        function handleAdminLogin() { if(document.getElementById('admin_pass').value === ADMIN_CODE) showPage('admin-dash'); else alert("Invalid Password"); }
+
+        document.getElementById('add-product-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const orig = parseInt(document.getElementById('p_original').value);
+            const newP = {
+                id: Date.now(),
+                name: document.getElementById('p_name').value,
+                price: parseInt(document.getElementById('p_price').value),
+                originalPrice: isNaN(orig) ? null : orig,
+                image: document.getElementById('p_image').value,
+                category: document.getElementById('p_cat').value,
+                desc: document.getElementById('p_desc').value,
+                colors: document.getElementById('p_colors').value.split(',').map(s => s.trim()).filter(s => s),
+                sizes: document.getElementById('p_sizes').value.split(',').map(s => s.trim()).filter(s => s)
+            };
+            products.push(newP);
+            localStorage.setItem('zarvique_stock', JSON.stringify(products));
+            this.reset();
+            renderAdminInventory(); renderProducts();
+            alert("Added Successfully!");
+        });
+
+        function renderAdminInventory() {
+            const list = document.getElementById('admin-inventory-list');
+            list.innerHTML = '';
+            products.forEach(p => {
+                const off = calculateOff(p.price, p.originalPrice);
+                list.innerHTML += `<div class="flex items-center justify-between p-4 bg-gray-50 border-l-4 border-gray-200"><div class="flex items-center gap-4"><img src="${p.image}" class="w-10 h-10 object-cover"><div><p class="text-xs font-bold uppercase">${p.name} ${off ? `<span class="text-green-600">(${off}% OFF)</span>` : ''}</p><p class="text-[9px] opacity-50">${p.category} | Rs. ${p.price.toLocaleString()}</p></div></div><button onclick="deleteProduct(${p.id})" class="text-red-500 text-[10px] font-bold uppercase">Remove</button></div>`;
+            });
+        }
+
+        function renderOrderHistory() {
+            const list = document.getElementById('order-history-list');
+            if(orderHistory.length === 0) return;
+            list.innerHTML = '';
+            orderHistory.forEach((o, index) => {
+                list.innerHTML += `<div class="bg-white p-6 shadow-sm border-l-4 ${o.confirmed ? 'border-green-500' : 'border-yellow-500'}"><div class="flex justify-between items-start mb-4"><div><h4 class="font-bold text-sm uppercase">${o.customer}</h4><p class="text-[10px] opacity-60">${o.date}</p></div><span class="text-[9px] font-bold px-3 py-1 bg-stone-100 uppercase">${o.confirmed ? 'Confirmed' : 'Pending'}</span></div><p class="text-xs whitespace-pre-wrap text-gray-600 mb-4">${o.details}</p><div class="flex justify-between items-center border-t pt-4"><span class="font-bold text-[#d4af37]">${o.total}</span>${!o.confirmed ? `<button onclick="confirmOrder(${index})" class="bg-black text-white px-4 py-2 text-[9px] font-bold uppercase">Confirm Order</button>` : ''}</div></div>`;
+            });
+        }
+
+        function confirmOrder(idx) { orderHistory[idx].confirmed = true; localStorage.setItem('zarvique_orders', JSON.stringify(orderHistory)); renderOrderHistory(); }
+        function deleteProduct(id) { if(!confirm("Are you sure?")) return; products = products.filter(p => p.id !== id); localStorage.setItem('zarvique_stock', JSON.stringify(products)); renderAdminInventory(); renderProducts(); }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); document.getElementById('overlay').classList.toggle('opacity-0'); document.getElementById('overlay').classList.toggle('pointer-events-none'); }
+
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = "PROCESSING..."; btn.disabled = true;
+            
+            const details = cart.map(i => `${i.name} (${i.color}/${i.size})`).join(', ');
+            const grandTotal = document.getElementById('summary-grand-total').innerText;
+            const customerName = document.getElementById('user_name').value;
+            const customerPhone = document.getElementById('user_phone').value;
+            const customerAddress = document.getElementById('user_address').value;
+
+            const newOrder = {
+                customer: customerName,
+                date: new Date().toLocaleString(),
+                details: `Items: ${details}\nPayment: COD\nDelivery: Rs. ${deliveryFee}\nAddress: ${customerAddress}`,
+                total: grandTotal,
+                confirmed: false
+            };
+            
+            orderHistory.unshift(newOrder);
+            localStorage.setItem('zarvique_orders', JSON.stringify(orderHistory));
+
+            /**
+             * EmailJS Service ID aur Template ID (Updated)
+             */
+            const SERVICE_ID = "service_7sxkz58";  
+            const TEMPLATE_ID = "template_gz4tlzq"; 
+
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, { 
+                from_name: customerName, 
+                phone: customerPhone, 
+                address: customerAddress, 
+                order_details: details, 
+                total_amount: grandTotal,
+                delivery_fee: deliveryFee
+            }).then(() => {
+                cart = []; updateCartUI(); showPage('success');
+            }).catch((err) => { 
+                console.error("Email failed:", err);
+                alert("Order recorded, but email notification failed. Please check your IDs.");
+                cart = []; updateCartUI(); showPage('success');
+            }).finally(() => { btn.innerText = originalText; btn.disabled = false; });
+        });
+
+        window.onscroll = () => {
+            const nav = document.getElementById('navbar');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled', 'text-black');
+                logo.classList.replace('text-white', 'text-black');
+            } else {
+                nav.classList.remove('nav-scrolled', 'text-black');
+                logo.classList.replace('text-black', 'text-white');
+            }
+        };
+    </script>
+</body>
+</html>
